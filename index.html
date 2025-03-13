@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f7f7f7;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #score {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Styles for dynamic result */
+        .correct {
+            color: green;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .wrong {
+            color: red;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .neutral {
+            color: gray;
+            font-size: 24px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lets play a game</h1>
+    <input id="box1" type="text">
+    <button onclick="check()">Check</button>
+    <p id="result" class="neutral">Result</p>
+    <h3 id="score">Score: 10</h3>
+
+    <script>
+        var input = document.getElementById("box1");
+        var result = document.getElementById("result");
+        var score = document.getElementById("score");
+        var random = Math.floor(Math.random() * 10) + 1;
+        var totalscore = 10;
+
+        function check() {
+            var enteredNumber = input.value;
+            if (enteredNumber == random) {
+                console.log("Right");
+                result.textContent = "Right";
+                result.className = "correct"; // Apply correct style
+                alert("You won!");
+                random = Math.floor(Math.random() * 10) + 1; // New random number after winning
+            } else {
+                console.log("Wrong");
+                result.textContent = "Wrong";
+                result.className = "wrong"; // Apply wrong style
+                totalscore = totalscore - 1;
+                score.textContent = "Score: " + totalscore;
+                if (totalscore <= 0) {
+                    alert("Game over! You lost all your points.");
+                    totalscore = 10; // Reset score after game over
+                    score.textContent = "Score: " + totalscore;
+                    random = Math.floor(Math.random() * 10) + 1; // Reset random number
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
